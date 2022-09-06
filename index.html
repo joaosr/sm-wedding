@@ -47,12 +47,17 @@
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css">
+
 	<!-- Magnific Popup -->
 	<link rel="stylesheet" href="css/magnific-popup.css">
 
 	<!-- Owl Carousel  -->
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
@@ -79,7 +84,12 @@
 					</div>
 				</div>
 				<div class="col-xs-10 text-right menu-1">
-					<ul>
+					<select class="selectpicker" data-width="fit" name="language">
+					  <option data-content='<span class="flag-icon flag-icon-gb"></span> Englis'>en</option>
+					  <option  data-content='<span class="flag-icon flag-icon-pt"></span> Português'>pt</option>
+						<option  data-content='<span class="flag-icon flag-icon-de"></span> Deutsch'>de</option>
+					</select>
+					<ul style="display: none;">
 						<li class="active"><a href="index.html">Home</a></li>
 						<li><a href="about.html">Story</a></li>
 						<li class="has-dropdown">
@@ -114,13 +124,13 @@
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+						<div id="welcome" class="display-tc animate-box" data-animate-effect="fadeIn">
 							<h1>João &amp; Bianca</h1>
 							<h2>We Are Getting Married</h2>
-							<h2>We invite you to celebrate our wedding</h2>
+							<h2>We Invite You To Celebrate Our Wedding</h2>
 							<h2>July 22nd, 2023 Belém of Pará, Brazil</h2>
 							<div class="simply-countdown simply-countdown-one"></div>
-							<p><a href="#" class="btn btn-default btn-sm">Save the date</a></p>
+							<p><a id="save_the_date" href="#" class="btn btn-default btn-sm">Save the date</a></p>
 						</div>
 					</div>
 				</div>
@@ -612,6 +622,8 @@
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+
 	<script>
     var d = new Date(2023, 6, 22, 14, 30, 0, 0);
 
@@ -629,6 +641,54 @@
         day: d.getDate(),
         enableUtc: false
     });
+
+		const language = {
+		  en: {
+		    "#welcome h2:eq(0)": "We Are Getting Married",
+				"#welcome h2:eq(1)": "We Invite You To Celebrate Our Wedding",
+				"#welcome h2:eq(2)": "July 22nd, 2023 Belém of Pará, Brazil",
+				"#save_the_date": 'Save the date',
+		  },
+		  pt: {
+				"#welcome h2:eq(0)": "Estamos nos casando",
+				"#welcome h2:eq(1)": "Convidamos você para celebrar nosso casamento",
+				"#welcome h2:eq(2)": "22 de julho de 2023 Belém do Pará, Brasil",
+				"#save_the_date": 'Save the date',
+		  },
+		  de: {
+				"#welcome h2:eq(0)": "Wir werden heiraten",
+				"#welcome h2:eq(1)": "Wir laden Sie ein, unsere Hochzeit zu feiern",
+				"#welcome h2:eq(2)": "22. Juli 2023 Belém von Pará, Brasilien",
+				"#save_the_date": 'Save the date',
+		  },
+		};
+
+
+
+		let defaultBrowserLang = navigator.language;
+		let defaultLang = 'en'
+
+		if(defaultBrowserLang.includes('pt')){
+			defaultLang = 'pt';
+		}
+		else if (defaultBrowserLang.includes('de')) {
+			defaultLang = 'de';
+		}
+
+		$('.selectpicker').selectpicker();
+		$('.selectpicker').selectpicker('val', defaultLang);
+
+		function updateText(lang){
+			for(var key in language[lang]){
+					$(key).text(language[lang][key]);
+			}
+		}
+
+		updateText(defaultLang);
+
+		$('.selectpicker').on('change', function(event){
+			updateText(event.target.value);
+		});
 </script>
 
 	</body>
