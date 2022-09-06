@@ -83,7 +83,7 @@
 						<img src="images/igreja_logo.png" alt="groom" class="img-responsive">
 					</div>
 				</div>
-				<div class="col-xs-10 text-right menu-1">
+				<div class="col-xs-10 text-right">
 					<select class="selectpicker" data-width="fit" name="language">
 					  <option data-content='<span class="flag-icon flag-icon-gb"></span> Englis'>en</option>
 					  <option  data-content='<span class="flag-icon flag-icon-pt"></span> Português'>pt</option>
@@ -675,7 +675,7 @@
 			defaultLang = 'de';
 		}
 
-		$('.selectpicker').selectpicker();
+		$('.selectpicker').selectpicker('mobile');
 		$('.selectpicker').selectpicker('val', defaultLang);
 
 		function updateText(lang){
