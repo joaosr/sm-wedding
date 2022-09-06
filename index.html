@@ -84,13 +84,13 @@
 					</div>
 				</div>
 				<div class="col-xs-10 text-right">
-					<select class="selectpicker" data-width="fit" name="language">
-					  <option data-content='<span class="flag-icon flag-icon-gb"></span> Englis'>en</option>
-					  <option  data-content='<span class="flag-icon flag-icon-pt"></span> Português'>pt</option>
-						<option  data-content='<span class="flag-icon flag-icon-de"></span> Deutsch'>de</option>
+					<select class="selectpicker" data-width="auto" name="language">
+						<option value="en" data-content='<span class="flag-icon flag-icon-gb"></span> English'>English</option>
+						<option value="pt" data-content='<span class="flag-icon flag-icon-pt"></span> Português'>Português</option>
+						<option value="de" data-content='<span class="flag-icon flag-icon-de"></span> Deutsch'>Deutsch</option>
 					</select>
-					<ul style="display: none;">
-						<li class="active"><a href="index.html">Home</a></li>
+					<ul>
+						<!-- <li class="active"><a href="index.html">Home</a></li>
 						<li><a href="about.html">Story</a></li>
 						<li class="has-dropdown">
 							<a href="services.html">Services</a>
@@ -110,7 +110,7 @@
 								<li><a href="#">jQuery</a></li>
 							</ul>
 						</li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="contact.html">Contact</a></li> -->
 					</ul>
 				</div>
 			</div>
@@ -675,7 +675,11 @@
 			defaultLang = 'de';
 		}
 
-		$('.selectpicker').selectpicker('mobile');
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		  $('.selectpicker').selectpicker('mobile');
+		}else{
+			$('.selectpicker').selectpicker();
+		}
 		$('.selectpicker').selectpicker('val', defaultLang);
 
 		function updateText(lang){
